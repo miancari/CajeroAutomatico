@@ -66,29 +66,28 @@ function mostrarVentanaEmergente(op) {
 function aceptar () {
   cantidad= parseInt(document.getElementById("cantidad").value);
   
-  if (cantidad + usuario[usuarioActual].saldo <=990) {
-    if (opcion === 'ingresar') {
+  if (opcion === 'ingresar') {
+    if (cantidad + usuario[usuarioActual].saldo <=990) {
       usuario[usuarioActual].saldo += cantidad;
       document.getElementById("cantidad").value = "";
-    } 
-  } else {
-    Swal.fire(
-      'En su cuenta',
-      'Debe tener al menos un saldo de $10 y maximo un saldo de $990.',
-      'info'
-    ) 
-  } 
-  if (usuario[usuarioActual].saldo - cantidad >= 10){
-    if (opcion === 'retirar'){
+    } else {
+      Swal.fire(
+        'Información',
+        'El cupo maximo en su cuenta es de $990.',
+        'info'
+      );
+  }
+  } else if (opcion === 'retirar'){
+    if (usuario[usuarioActual].saldo - cantidad >= 10){
       usuario[usuarioActual].saldo -= cantidad;
       document.getElementById("cantidad").value = "";
-    } 
-  }else {
-    Swal.fire(
-      'En su cuenta',
-      'Debe tener al menos un saldo de $10 y maximo un saldo de $990.',
-      'info'
-    ) 
+    } else {
+      Swal.fire(
+        'Información',
+        'Debe tener al menos un saldo de $10',
+        'info'
+      );
+  }
   } 
   actualizarSaldoEnPantalla();
   ocultarVentanaEmergente();
